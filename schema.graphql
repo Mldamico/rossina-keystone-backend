@@ -1,0 +1,1275 @@
+input RoleRelateToOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  disconnect: RoleWhereUniqueInput
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type User {
+  id: ID!
+  nombre: String
+  apellido: String
+  telefono: String
+  email: String
+  password_is_set: Boolean
+  role: Role
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput]
+  OR: [UserWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  nombre: String
+  nombre_not: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  nombre_i: String
+  nombre_not_i: String
+  nombre_contains_i: String
+  nombre_not_contains_i: String
+  nombre_starts_with_i: String
+  nombre_not_starts_with_i: String
+  nombre_ends_with_i: String
+  nombre_not_ends_with_i: String
+  nombre_in: [String]
+  nombre_not_in: [String]
+  apellido: String
+  apellido_not: String
+  apellido_contains: String
+  apellido_not_contains: String
+  apellido_starts_with: String
+  apellido_not_starts_with: String
+  apellido_ends_with: String
+  apellido_not_ends_with: String
+  apellido_i: String
+  apellido_not_i: String
+  apellido_contains_i: String
+  apellido_not_contains_i: String
+  apellido_starts_with_i: String
+  apellido_not_starts_with_i: String
+  apellido_ends_with_i: String
+  apellido_not_ends_with_i: String
+  apellido_in: [String]
+  apellido_not_in: [String]
+  telefono: String
+  telefono_not: String
+  telefono_contains: String
+  telefono_not_contains: String
+  telefono_starts_with: String
+  telefono_not_starts_with: String
+  telefono_ends_with: String
+  telefono_not_ends_with: String
+  telefono_i: String
+  telefono_not_i: String
+  telefono_contains_i: String
+  telefono_not_contains_i: String
+  telefono_starts_with_i: String
+  telefono_not_starts_with_i: String
+  telefono_ends_with_i: String
+  telefono_not_ends_with_i: String
+  telefono_in: [String]
+  telefono_not_in: [String]
+  email: String
+  email_not: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  email_i: String
+  email_not_i: String
+  email_contains_i: String
+  email_not_contains_i: String
+  email_starts_with_i: String
+  email_not_starts_with_i: String
+  email_ends_with_i: String
+  email_not_ends_with_i: String
+  email_in: [String]
+  email_not_in: [String]
+  password_is_set: Boolean
+  role: RoleWhereInput
+  role_is_null: Boolean
+}
+
+input UserWhereUniqueInput {
+  id: ID!
+}
+
+enum SortUsersBy {
+  id_ASC
+  id_DESC
+  nombre_ASC
+  nombre_DESC
+  apellido_ASC
+  apellido_DESC
+  telefono_ASC
+  telefono_DESC
+  email_ASC
+  email_DESC
+  role_ASC
+  role_DESC
+}
+
+input UserUpdateInput {
+  nombre: String
+  apellido: String
+  telefono: String
+  email: String
+  password: String
+  role: RoleRelateToOneInput
+}
+
+input UsersUpdateInput {
+  id: ID!
+  data: UserUpdateInput
+}
+
+input UserCreateInput {
+  nombre: String
+  apellido: String
+  telefono: String
+  email: String
+  password: String
+  role: RoleRelateToOneInput
+}
+
+input UsersCreateInput {
+  data: UserCreateInput
+}
+
+input ProductImageRelateToManyInput {
+  create: [ProductImageCreateInput]
+  connect: [ProductImageWhereUniqueInput]
+  disconnect: [ProductImageWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input StockRelateToManyInput {
+  create: [StockCreateInput]
+  connect: [StockWhereUniqueInput]
+  disconnect: [StockWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Product {
+  id: ID!
+  label: String
+  articulo: String
+  nombre: String
+  slug: String
+  descripcion: String
+  imagen(
+    where: ProductImageWhereInput
+    search: String
+    sortBy: [SortProductImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [ProductImage!]!
+  _imagenMeta(
+    where: ProductImageWhereInput
+    search: String
+    sortBy: [SortProductImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  status: String
+  precio: Int
+  tipoDePrenda: String
+  stock(
+    where: StockWhereInput
+    search: String
+    sortBy: [SortStocksBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Stock!]!
+  _stockMeta(
+    where: StockWhereInput
+    search: String
+    sortBy: [SortStocksBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  marca: String
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput]
+  OR: [ProductWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  articulo: String
+  articulo_not: String
+  articulo_contains: String
+  articulo_not_contains: String
+  articulo_starts_with: String
+  articulo_not_starts_with: String
+  articulo_ends_with: String
+  articulo_not_ends_with: String
+  articulo_i: String
+  articulo_not_i: String
+  articulo_contains_i: String
+  articulo_not_contains_i: String
+  articulo_starts_with_i: String
+  articulo_not_starts_with_i: String
+  articulo_ends_with_i: String
+  articulo_not_ends_with_i: String
+  articulo_in: [String]
+  articulo_not_in: [String]
+  nombre: String
+  nombre_not: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  nombre_i: String
+  nombre_not_i: String
+  nombre_contains_i: String
+  nombre_not_contains_i: String
+  nombre_starts_with_i: String
+  nombre_not_starts_with_i: String
+  nombre_ends_with_i: String
+  nombre_not_ends_with_i: String
+  nombre_in: [String]
+  nombre_not_in: [String]
+  descripcion: String
+  descripcion_not: String
+  descripcion_contains: String
+  descripcion_not_contains: String
+  descripcion_starts_with: String
+  descripcion_not_starts_with: String
+  descripcion_ends_with: String
+  descripcion_not_ends_with: String
+  descripcion_i: String
+  descripcion_not_i: String
+  descripcion_contains_i: String
+  descripcion_not_contains_i: String
+  descripcion_starts_with_i: String
+  descripcion_not_starts_with_i: String
+  descripcion_ends_with_i: String
+  descripcion_not_ends_with_i: String
+  descripcion_in: [String]
+  descripcion_not_in: [String]
+
+  """
+   condition must be true for all nodes
+  """
+  imagen_every: ProductImageWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  imagen_some: ProductImageWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  imagen_none: ProductImageWhereInput
+  status: String
+  status_not: String
+  status_in: [String]
+  status_not_in: [String]
+  precio: Int
+  precio_not: Int
+  precio_lt: Int
+  precio_lte: Int
+  precio_gt: Int
+  precio_gte: Int
+  precio_in: [Int]
+  precio_not_in: [Int]
+  tipoDePrenda: String
+  tipoDePrenda_not: String
+  tipoDePrenda_in: [String]
+  tipoDePrenda_not_in: [String]
+
+  """
+   condition must be true for all nodes
+  """
+  stock_every: StockWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  stock_some: StockWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  stock_none: StockWhereInput
+  marca: String
+  marca_not: String
+  marca_in: [String]
+  marca_not_in: [String]
+}
+
+input ProductWhereUniqueInput {
+  id: ID!
+}
+
+enum SortProductsBy {
+  id_ASC
+  id_DESC
+  articulo_ASC
+  articulo_DESC
+  nombre_ASC
+  nombre_DESC
+  descripcion_ASC
+  descripcion_DESC
+  imagen_ASC
+  imagen_DESC
+  status_ASC
+  status_DESC
+  precio_ASC
+  precio_DESC
+  tipoDePrenda_ASC
+  tipoDePrenda_DESC
+  stock_ASC
+  stock_DESC
+  marca_ASC
+  marca_DESC
+}
+
+input ProductUpdateInput {
+  articulo: String
+  nombre: String
+  descripcion: String
+  imagen: ProductImageRelateToManyInput
+  status: String
+  precio: Int
+  tipoDePrenda: String
+  stock: StockRelateToManyInput
+  marca: String
+}
+
+input ProductsUpdateInput {
+  id: ID!
+  data: ProductUpdateInput
+}
+
+input ProductCreateInput {
+  articulo: String
+  nombre: String
+  descripcion: String
+  imagen: ProductImageRelateToManyInput
+  status: String
+  precio: Int
+  tipoDePrenda: String
+  stock: StockRelateToManyInput
+  marca: String
+}
+
+input ProductsCreateInput {
+  data: ProductCreateInput
+}
+
+type CloudinaryImage_File {
+  id: ID
+  path: String
+  filename: String
+  originalFilename: String
+  mimetype: String
+  encoding: String
+  publicUrl: String
+  publicUrlTransformed(transformation: CloudinaryImageFormat): String
+}
+
+"""
+Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+All options are strings as they ultimately end up in a URL.
+"""
+input CloudinaryImageFormat {
+  """
+   Rewrites the filename to be this pretty string. Do not include `/` or `.`
+  """
+  prettyName: String
+  width: String
+  height: String
+  crop: String
+  aspect_ratio: String
+  gravity: String
+  zoom: String
+  x: String
+  y: String
+  format: String
+  fetch_format: String
+  quality: String
+  radius: String
+  angle: String
+  effect: String
+  opacity: String
+  border: String
+  background: String
+  overlay: String
+  underlay: String
+  default_image: String
+  delay: String
+  color: String
+  color_space: String
+  dpr: String
+  page: String
+  density: String
+  flags: String
+  transformation: String
+}
+
+"""
+ A keystone list
+"""
+type ProductImage {
+  id: ID!
+  image: CloudinaryImage_File
+  altText: String
+}
+
+input ProductImageWhereInput {
+  AND: [ProductImageWhereInput]
+  OR: [ProductImageWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  image: String
+  image_not: String
+  image_in: [String]
+  image_not_in: [String]
+  altText: String
+  altText_not: String
+  altText_contains: String
+  altText_not_contains: String
+  altText_starts_with: String
+  altText_not_starts_with: String
+  altText_ends_with: String
+  altText_not_ends_with: String
+  altText_i: String
+  altText_not_i: String
+  altText_contains_i: String
+  altText_not_contains_i: String
+  altText_starts_with_i: String
+  altText_not_starts_with_i: String
+  altText_ends_with_i: String
+  altText_not_ends_with_i: String
+  altText_in: [String]
+  altText_not_in: [String]
+}
+
+input ProductImageWhereUniqueInput {
+  id: ID!
+}
+
+enum SortProductImagesBy {
+  id_ASC
+  id_DESC
+  altText_ASC
+  altText_DESC
+}
+
+input ProductImageUpdateInput {
+  image: Upload
+  altText: String
+}
+
+input ProductImagesUpdateInput {
+  id: ID!
+  data: ProductImageUpdateInput
+}
+
+input ProductImageCreateInput {
+  image: Upload
+  altText: String
+}
+
+input ProductImagesCreateInput {
+  data: ProductImageCreateInput
+}
+
+"""
+ A keystone list
+"""
+type Stock {
+  id: ID!
+  label: String
+  color: String
+  cantidadTalle0: Int
+  cantidadTalle1: Int
+  cantidadTalle2: Int
+  cantidadTalle3: Int
+  cantidadTalle4: Int
+  cantidadTalle5: Int
+  cantidadTalle6: Int
+  cantidadTalle7: Int
+}
+
+input StockWhereInput {
+  AND: [StockWhereInput]
+  OR: [StockWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  color: String
+  color_not: String
+  color_contains: String
+  color_not_contains: String
+  color_starts_with: String
+  color_not_starts_with: String
+  color_ends_with: String
+  color_not_ends_with: String
+  color_i: String
+  color_not_i: String
+  color_contains_i: String
+  color_not_contains_i: String
+  color_starts_with_i: String
+  color_not_starts_with_i: String
+  color_ends_with_i: String
+  color_not_ends_with_i: String
+  color_in: [String]
+  color_not_in: [String]
+  cantidadTalle0: Int
+  cantidadTalle0_not: Int
+  cantidadTalle0_lt: Int
+  cantidadTalle0_lte: Int
+  cantidadTalle0_gt: Int
+  cantidadTalle0_gte: Int
+  cantidadTalle0_in: [Int]
+  cantidadTalle0_not_in: [Int]
+  cantidadTalle1: Int
+  cantidadTalle1_not: Int
+  cantidadTalle1_lt: Int
+  cantidadTalle1_lte: Int
+  cantidadTalle1_gt: Int
+  cantidadTalle1_gte: Int
+  cantidadTalle1_in: [Int]
+  cantidadTalle1_not_in: [Int]
+  cantidadTalle2: Int
+  cantidadTalle2_not: Int
+  cantidadTalle2_lt: Int
+  cantidadTalle2_lte: Int
+  cantidadTalle2_gt: Int
+  cantidadTalle2_gte: Int
+  cantidadTalle2_in: [Int]
+  cantidadTalle2_not_in: [Int]
+  cantidadTalle3: Int
+  cantidadTalle3_not: Int
+  cantidadTalle3_lt: Int
+  cantidadTalle3_lte: Int
+  cantidadTalle3_gt: Int
+  cantidadTalle3_gte: Int
+  cantidadTalle3_in: [Int]
+  cantidadTalle3_not_in: [Int]
+  cantidadTalle4: Int
+  cantidadTalle4_not: Int
+  cantidadTalle4_lt: Int
+  cantidadTalle4_lte: Int
+  cantidadTalle4_gt: Int
+  cantidadTalle4_gte: Int
+  cantidadTalle4_in: [Int]
+  cantidadTalle4_not_in: [Int]
+  cantidadTalle5: Int
+  cantidadTalle5_not: Int
+  cantidadTalle5_lt: Int
+  cantidadTalle5_lte: Int
+  cantidadTalle5_gt: Int
+  cantidadTalle5_gte: Int
+  cantidadTalle5_in: [Int]
+  cantidadTalle5_not_in: [Int]
+  cantidadTalle6: Int
+  cantidadTalle6_not: Int
+  cantidadTalle6_lt: Int
+  cantidadTalle6_lte: Int
+  cantidadTalle6_gt: Int
+  cantidadTalle6_gte: Int
+  cantidadTalle6_in: [Int]
+  cantidadTalle6_not_in: [Int]
+  cantidadTalle7: Int
+  cantidadTalle7_not: Int
+  cantidadTalle7_lt: Int
+  cantidadTalle7_lte: Int
+  cantidadTalle7_gt: Int
+  cantidadTalle7_gte: Int
+  cantidadTalle7_in: [Int]
+  cantidadTalle7_not_in: [Int]
+}
+
+input StockWhereUniqueInput {
+  id: ID!
+}
+
+enum SortStocksBy {
+  id_ASC
+  id_DESC
+  color_ASC
+  color_DESC
+  cantidadTalle0_ASC
+  cantidadTalle0_DESC
+  cantidadTalle1_ASC
+  cantidadTalle1_DESC
+  cantidadTalle2_ASC
+  cantidadTalle2_DESC
+  cantidadTalle3_ASC
+  cantidadTalle3_DESC
+  cantidadTalle4_ASC
+  cantidadTalle4_DESC
+  cantidadTalle5_ASC
+  cantidadTalle5_DESC
+  cantidadTalle6_ASC
+  cantidadTalle6_DESC
+  cantidadTalle7_ASC
+  cantidadTalle7_DESC
+}
+
+input StockUpdateInput {
+  color: String
+  cantidadTalle0: Int
+  cantidadTalle1: Int
+  cantidadTalle2: Int
+  cantidadTalle3: Int
+  cantidadTalle4: Int
+  cantidadTalle5: Int
+  cantidadTalle6: Int
+  cantidadTalle7: Int
+}
+
+input StocksUpdateInput {
+  id: ID!
+  data: StockUpdateInput
+}
+
+input StockCreateInput {
+  color: String
+  cantidadTalle0: Int
+  cantidadTalle1: Int
+  cantidadTalle2: Int
+  cantidadTalle3: Int
+  cantidadTalle4: Int
+  cantidadTalle5: Int
+  cantidadTalle6: Int
+  cantidadTalle7: Int
+}
+
+input StocksCreateInput {
+  data: StockCreateInput
+}
+
+input UserRelateToManyInput {
+  create: [UserCreateInput]
+  connect: [UserWhereUniqueInput]
+  disconnect: [UserWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Role {
+  id: ID!
+  name: String
+  canManageProducts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  canManageCart: Boolean
+  canManageOrders: Boolean
+  assignedTo(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [User!]!
+  _assignedToMeta(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+}
+
+input RoleWhereInput {
+  AND: [RoleWhereInput]
+  OR: [RoleWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  canManageProducts: Boolean
+  canManageProducts_not: Boolean
+  canSeeOtherUsers: Boolean
+  canSeeOtherUsers_not: Boolean
+  canManageUsers: Boolean
+  canManageUsers_not: Boolean
+  canManageRoles: Boolean
+  canManageRoles_not: Boolean
+  canManageCart: Boolean
+  canManageCart_not: Boolean
+  canManageOrders: Boolean
+  canManageOrders_not: Boolean
+
+  """
+   condition must be true for all nodes
+  """
+  assignedTo_every: UserWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  assignedTo_some: UserWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  assignedTo_none: UserWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID!
+}
+
+enum SortRolesBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  canManageProducts_ASC
+  canManageProducts_DESC
+  canSeeOtherUsers_ASC
+  canSeeOtherUsers_DESC
+  canManageUsers_ASC
+  canManageUsers_DESC
+  canManageRoles_ASC
+  canManageRoles_DESC
+  canManageCart_ASC
+  canManageCart_DESC
+  canManageOrders_ASC
+  canManageOrders_DESC
+  assignedTo_ASC
+  assignedTo_DESC
+}
+
+input RoleUpdateInput {
+  name: String
+  canManageProducts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  canManageCart: Boolean
+  canManageOrders: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesUpdateInput {
+  id: ID!
+  data: RoleUpdateInput
+}
+
+input RoleCreateInput {
+  name: String
+  canManageProducts: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  canManageCart: Boolean
+  canManageOrders: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesCreateInput {
+  data: RoleCreateInput
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
+
+type _QueryMeta {
+  count: Int
+}
+
+type Mutation {
+  """
+   Create a single User item.
+  """
+  createUser(data: UserCreateInput): User
+
+  """
+   Create multiple User items.
+  """
+  createUsers(data: [UsersCreateInput]): [User]
+
+  """
+   Update a single User item by ID.
+  """
+  updateUser(id: ID!, data: UserUpdateInput): User
+
+  """
+   Update multiple User items by ID.
+  """
+  updateUsers(data: [UsersUpdateInput]): [User]
+
+  """
+   Delete a single User item by ID.
+  """
+  deleteUser(id: ID!): User
+
+  """
+   Delete multiple User items by ID.
+  """
+  deleteUsers(ids: [ID!]): [User]
+
+  """
+   Create a single Product item.
+  """
+  createProduct(data: ProductCreateInput): Product
+
+  """
+   Create multiple Product items.
+  """
+  createProducts(data: [ProductsCreateInput]): [Product]
+
+  """
+   Update a single Product item by ID.
+  """
+  updateProduct(id: ID!, data: ProductUpdateInput): Product
+
+  """
+   Update multiple Product items by ID.
+  """
+  updateProducts(data: [ProductsUpdateInput]): [Product]
+
+  """
+   Delete a single Product item by ID.
+  """
+  deleteProduct(id: ID!): Product
+
+  """
+   Delete multiple Product items by ID.
+  """
+  deleteProducts(ids: [ID!]): [Product]
+
+  """
+   Create a single ProductImage item.
+  """
+  createProductImage(data: ProductImageCreateInput): ProductImage
+
+  """
+   Create multiple ProductImage items.
+  """
+  createProductImages(data: [ProductImagesCreateInput]): [ProductImage]
+
+  """
+   Update a single ProductImage item by ID.
+  """
+  updateProductImage(id: ID!, data: ProductImageUpdateInput): ProductImage
+
+  """
+   Update multiple ProductImage items by ID.
+  """
+  updateProductImages(data: [ProductImagesUpdateInput]): [ProductImage]
+
+  """
+   Delete a single ProductImage item by ID.
+  """
+  deleteProductImage(id: ID!): ProductImage
+
+  """
+   Delete multiple ProductImage items by ID.
+  """
+  deleteProductImages(ids: [ID!]): [ProductImage]
+
+  """
+   Create a single Stock item.
+  """
+  createStock(data: StockCreateInput): Stock
+
+  """
+   Create multiple Stock items.
+  """
+  createStocks(data: [StocksCreateInput]): [Stock]
+
+  """
+   Update a single Stock item by ID.
+  """
+  updateStock(id: ID!, data: StockUpdateInput): Stock
+
+  """
+   Update multiple Stock items by ID.
+  """
+  updateStocks(data: [StocksUpdateInput]): [Stock]
+
+  """
+   Delete a single Stock item by ID.
+  """
+  deleteStock(id: ID!): Stock
+
+  """
+   Delete multiple Stock items by ID.
+  """
+  deleteStocks(ids: [ID!]): [Stock]
+
+  """
+   Create a single Role item.
+  """
+  createRole(data: RoleCreateInput): Role
+
+  """
+   Create multiple Role items.
+  """
+  createRoles(data: [RolesCreateInput]): [Role]
+
+  """
+   Update a single Role item by ID.
+  """
+  updateRole(id: ID!, data: RoleUpdateInput): Role
+
+  """
+   Update multiple Role items by ID.
+  """
+  updateRoles(data: [RolesUpdateInput]): [Role]
+
+  """
+   Delete a single Role item by ID.
+  """
+  deleteRole(id: ID!): Role
+
+  """
+   Delete multiple Role items by ID.
+  """
+  deleteRoles(ids: [ID!]): [Role]
+  authenticateUserWithPassword(
+    email: String!
+    password: String!
+  ): UserAuthenticationWithPasswordResult!
+  createInitialUser(
+    data: CreateInitialUserInput!
+  ): UserAuthenticationWithPasswordSuccess!
+  endSession: Boolean!
+}
+
+"""
+The `Upload` scalar type represents a file upload.
+"""
+scalar Upload
+
+union AuthenticatedItem = User
+
+union UserAuthenticationWithPasswordResult =
+    UserAuthenticationWithPasswordSuccess
+  | UserAuthenticationWithPasswordFailure
+
+type UserAuthenticationWithPasswordSuccess {
+  sessionToken: String!
+  item: User!
+}
+
+type UserAuthenticationWithPasswordFailure {
+  code: PasswordAuthErrorCode!
+  message: String!
+}
+
+enum PasswordAuthErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  SECRET_NOT_SET
+  MULTIPLE_IDENTITY_MATCHES
+  SECRET_MISMATCH
+}
+
+input CreateInitialUserInput {
+  nombre: String
+  email: String
+  password: String
+}
+
+type Query {
+  """
+   Search for all User items which match the where clause.
+  """
+  allUsers(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [User]
+
+  """
+   Search for the User item with the matching ID.
+  """
+  User(where: UserWhereUniqueInput!): User
+
+  """
+   Perform a meta-query on all User items which match the where clause.
+  """
+  _allUsersMeta(
+    where: UserWhereInput
+    search: String
+    sortBy: [SortUsersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Product items which match the where clause.
+  """
+  allProducts(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Product]
+
+  """
+   Search for the Product item with the matching ID.
+  """
+  Product(where: ProductWhereUniqueInput!): Product
+
+  """
+   Perform a meta-query on all Product items which match the where clause.
+  """
+  _allProductsMeta(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all ProductImage items which match the where clause.
+  """
+  allProductImages(
+    where: ProductImageWhereInput
+    search: String
+    sortBy: [SortProductImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [ProductImage]
+
+  """
+   Search for the ProductImage item with the matching ID.
+  """
+  ProductImage(where: ProductImageWhereUniqueInput!): ProductImage
+
+  """
+   Perform a meta-query on all ProductImage items which match the where clause.
+  """
+  _allProductImagesMeta(
+    where: ProductImageWhereInput
+    search: String
+    sortBy: [SortProductImagesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Stock items which match the where clause.
+  """
+  allStocks(
+    where: StockWhereInput
+    search: String
+    sortBy: [SortStocksBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Stock]
+
+  """
+   Search for the Stock item with the matching ID.
+  """
+  Stock(where: StockWhereUniqueInput!): Stock
+
+  """
+   Perform a meta-query on all Stock items which match the where clause.
+  """
+  _allStocksMeta(
+    where: StockWhereInput
+    search: String
+    sortBy: [SortStocksBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Role items which match the where clause.
+  """
+  allRoles(
+    where: RoleWhereInput
+    search: String
+    sortBy: [SortRolesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Role]
+
+  """
+   Search for the Role item with the matching ID.
+  """
+  Role(where: RoleWhereUniqueInput!): Role
+
+  """
+   Perform a meta-query on all Role items which match the where clause.
+  """
+  _allRolesMeta(
+    where: RoleWhereInput
+    search: String
+    sortBy: [SortRolesBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  authenticatedItem: AuthenticatedItem
+  keystone: KeystoneMeta!
+}
+
+type KeystoneMeta {
+  adminMeta: KeystoneAdminMeta!
+}
+
+type KeystoneAdminMeta {
+  enableSignout: Boolean!
+  enableSessionItem: Boolean!
+  lists: [KeystoneAdminUIListMeta!]!
+  list(key: String!): KeystoneAdminUIListMeta
+}
+
+type KeystoneAdminUIListMeta {
+  key: String!
+  itemQueryName: String!
+  listQueryName: String!
+  hideCreate: Boolean!
+  hideDelete: Boolean!
+  path: String!
+  label: String!
+  singular: String!
+  plural: String!
+  description: String
+  initialColumns: [String!]!
+  pageSize: Int!
+  labelField: String!
+  fields: [KeystoneAdminUIFieldMeta!]!
+  initialSort: KeystoneAdminUISort
+  isHidden: Boolean!
+}
+
+type KeystoneAdminUIFieldMeta {
+  path: String!
+  label: String!
+  isOrderable: Boolean!
+  fieldMeta: JSON
+  viewsIndex: Int!
+  customViewsIndex: Int
+  createView: KeystoneAdminUIFieldMetaCreateView!
+  listView: KeystoneAdminUIFieldMetaListView!
+  itemView(id: ID!): KeystoneAdminUIFieldMetaItemView
+}
+
+type KeystoneAdminUIFieldMetaCreateView {
+  fieldMode: KeystoneAdminUIFieldMetaCreateViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaCreateViewFieldMode {
+  edit
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaListView {
+  fieldMode: KeystoneAdminUIFieldMetaListViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaListViewFieldMode {
+  read
+  hidden
+}
+
+type KeystoneAdminUIFieldMetaItemView {
+  fieldMode: KeystoneAdminUIFieldMetaItemViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaItemViewFieldMode {
+  edit
+  read
+  hidden
+}
+
+type KeystoneAdminUISort {
+  field: String!
+  direction: KeystoneAdminUISortDirection!
+}
+
+enum KeystoneAdminUISortDirection {
+  ASC
+  DESC
+}
