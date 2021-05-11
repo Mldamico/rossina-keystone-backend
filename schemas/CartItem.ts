@@ -1,4 +1,4 @@
-import { integer, select, text, relationship } from '@keystone-next/fields';
+import { integer, relationship } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 import { isSignedIn, rules } from '../access';
 
@@ -11,15 +11,15 @@ export const CartItem = list({
   },
   ui: {
     listView: {
-      initialColumns: ['product', 'quantity', 'user'],
+      initialColumns: ['producto', 'cantidad', 'usuario'],
     },
   },
   fields: {
-    quantity: integer({
+    cantidad: integer({
       defaultValue: 1,
       isRequired: true,
     }),
-    product: relationship({ ref: 'Product' }),
-    user: relationship({ ref: 'User.cart' }),
+    producto: relationship({ ref: 'Product' }),
+    usuario: relationship({ ref: 'User.cart' }),
   },
 });

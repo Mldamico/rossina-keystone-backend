@@ -1,5 +1,4 @@
 import {
-  checkbox,
   integer,
   relationship,
   select,

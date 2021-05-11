@@ -1,10 +1,4 @@
-import {
-  integer,
-  select,
-  text,
-  relationship,
-  virtual,
-} from '@keystone-next/fields';
+import { integer, text, relationship, virtual } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 import { isSignedIn, rules } from '../access';
 
@@ -23,8 +17,8 @@ export const Order = list({
       },
     }),
     total: integer(),
-    items: relationship({ ref: 'OrderItem.order', many: true }),
-    user: relationship({ ref: 'User.orders' }),
-    charge: text(),
+    items: relationship({ ref: 'OrderItem.orden', many: true }),
+    usuario: relationship({ ref: 'User.ordenes' }),
+    charge: integer(), //Revisar esto luego
   },
 });

@@ -19,8 +19,8 @@ export const User = list({
     telefono: text(),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
-    role: relationship({ ref: 'Role.assignedTo' }),
-    cart: relationship({ ref: 'CartItem.user', many: true }),
-    orders: relationship({ ref: 'Order.user', many: true }),
+    rol: relationship({ ref: 'Role.asignado' }),
+    cart: relationship({ ref: 'CartItem.usuario', many: true }),
+    ordenes: relationship({ ref: 'Order.usuario', many: true }),
   },
 });

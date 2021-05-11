@@ -9,9 +9,6 @@ const generatedPermissions = Object.fromEntries(
   permissionsList.map((permission) => [
     permission,
     function ({ session }: ListAccessArgs) {
-      console.log('La session arranca aca');
-      console.log(session);
-      console.log(session.data);
       return !!session?.data.role?.[permission];
     },
   ])
@@ -32,13 +29,10 @@ export const rules = {
     return { user: { id: session.itemId } };
   },
   canReadProducts({ session }: ListAccessArgs) {
-    console.log('Entra a leer');
     if (!isSignedIn({ session })) {
-      console.log('No Esta logueado');
       return false;
     }
     if (permissions.canManageProducts({ session })) {
-      console.log('Tiene permisos para manegar los productos');
       return true;
     }
 

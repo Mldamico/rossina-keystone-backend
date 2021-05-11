@@ -1,10 +1,4 @@
-import {
-  integer,
-  relationship,
-  select,
-  text,
-  virtual,
-} from '@keystone-next/fields';
+import { integer, text, virtual } from '@keystone-next/fields';
 import { list } from '@keystone-next/keystone/schema';
 
 export const Stock = list({

@@ -75,6 +75,6 @@ export const OrderItem = list({
       ],
       defaultValue: 'Selu',
     }),
-    order: relationship({ ref: 'Order.items' }),
+    orden: relationship({ ref: 'Order.items' }),
   },
 });

@@ -16,10 +16,10 @@ export const Role = list({
     isHidden: (args) => !permissions.canManageRoles(args),
   },
   fields: {
-    name: text({ isRequired: true }),
+    nombre: text({ isRequired: true }),
     ...permissionFields,
-    assignedTo: relationship({
-      ref: 'User.role',
+    asignado: relationship({
+      ref: 'User.rol',
       many: true,
       ui: {
         itemView: { fieldMode: 'read' },
