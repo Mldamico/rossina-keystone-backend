@@ -12,6 +12,9 @@ import { ProductImage } from './schemas/ProductImage';
 import { Stock } from './schemas/Stock';
 import { Role } from './schemas/Role';
 import { permissionsList } from './schemas/fields';
+import { OrderItem } from './schemas/OrderItem';
+import { Order } from './schemas/Order';
+import { CartItem } from './schemas/CartItem';
 
 let sessionSecret = process.env.SESSION_SECRET;
 const databaseURL = process.env.DATABASE_URL || 'file:./keystone.db';
@@ -52,7 +55,16 @@ export default auth.withAuth(
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,
     },
-    lists: createSchema({ User, Product, ProductImage, Stock, Role }),
+    lists: createSchema({
+      User,
+      Product,
+      ProductImage,
+      Stock,
+      Role,
+      OrderItem,
+      CartItem,
+      Order,
+    }),
 
     session: withItemData(
       statelessSessions({
