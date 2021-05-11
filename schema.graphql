@@ -29,7 +29,7 @@ type User {
   telefono: String
   email: String
   password_is_set: Boolean
-  role: Role
+  rol: Role
   cart(
     where: CartItemWhereInput
     search: String
@@ -46,7 +46,7 @@ type User {
     first: Int
     skip: Int
   ): _QueryMeta
-  orders(
+  ordenes(
     where: OrderWhereInput
     search: String
     sortBy: [SortOrdersBy!]
@@ -54,7 +54,7 @@ type User {
     first: Int
     skip: Int
   ): [Order!]!
-  _ordersMeta(
+  _ordenesMeta(
     where: OrderWhereInput
     search: String
     sortBy: [SortOrdersBy!]
@@ -148,8 +148,8 @@ input UserWhereInput {
   email_in: [String]
   email_not_in: [String]
   password_is_set: Boolean
-  role: RoleWhereInput
-  role_is_null: Boolean
+  rol: RoleWhereInput
+  rol_is_null: Boolean
 
   """
    condition must be true for all nodes
@@ -169,17 +169,17 @@ input UserWhereInput {
   """
    condition must be true for all nodes
   """
-  orders_every: OrderWhereInput
+  ordenes_every: OrderWhereInput
 
   """
    condition must be true for at least 1 node
   """
-  orders_some: OrderWhereInput
+  ordenes_some: OrderWhereInput
 
   """
    condition must be false for all nodes
   """
-  orders_none: OrderWhereInput
+  ordenes_none: OrderWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -197,12 +197,12 @@ enum SortUsersBy {
   telefono_DESC
   email_ASC
   email_DESC
-  role_ASC
-  role_DESC
+  rol_ASC
+  rol_DESC
   cart_ASC
   cart_DESC
-  orders_ASC
-  orders_DESC
+  ordenes_ASC
+  ordenes_DESC
 }
 
 input UserUpdateInput {
@@ -211,9 +211,9 @@ input UserUpdateInput {
   telefono: String
   email: String
   password: String
-  role: RoleRelateToOneInput
+  rol: RoleRelateToOneInput
   cart: CartItemRelateToManyInput
-  orders: OrderRelateToManyInput
+  ordenes: OrderRelateToManyInput
 }
 
 input UsersUpdateInput {
@@ -227,9 +227,9 @@ input UserCreateInput {
   telefono: String
   email: String
   password: String
-  role: RoleRelateToOneInput
+  rol: RoleRelateToOneInput
   cart: CartItemRelateToManyInput
-  orders: OrderRelateToManyInput
+  ordenes: OrderRelateToManyInput
 }
 
 input UsersCreateInput {
@@ -783,14 +783,14 @@ input UserRelateToManyInput {
 """
 type Role {
   id: ID!
-  name: String
+  nombre: String
   canManageProducts: Boolean
   canSeeOtherUsers: Boolean
   canManageUsers: Boolean
   canManageRoles: Boolean
   canManageCart: Boolean
   canManageOrders: Boolean
-  assignedTo(
+  asignado(
     where: UserWhereInput
     search: String
     sortBy: [SortUsersBy!]
@@ -798,7 +798,7 @@ type Role {
     first: Int
     skip: Int
   ): [User!]!
-  _assignedToMeta(
+  _asignadoMeta(
     where: UserWhereInput
     search: String
     sortBy: [SortUsersBy!]
@@ -819,24 +819,24 @@ input RoleWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
-  name: String
-  name_not: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  name_i: String
-  name_not_i: String
-  name_contains_i: String
-  name_not_contains_i: String
-  name_starts_with_i: String
-  name_not_starts_with_i: String
-  name_ends_with_i: String
-  name_not_ends_with_i: String
-  name_in: [String]
-  name_not_in: [String]
+  nombre: String
+  nombre_not: String
+  nombre_contains: String
+  nombre_not_contains: String
+  nombre_starts_with: String
+  nombre_not_starts_with: String
+  nombre_ends_with: String
+  nombre_not_ends_with: String
+  nombre_i: String
+  nombre_not_i: String
+  nombre_contains_i: String
+  nombre_not_contains_i: String
+  nombre_starts_with_i: String
+  nombre_not_starts_with_i: String
+  nombre_ends_with_i: String
+  nombre_not_ends_with_i: String
+  nombre_in: [String]
+  nombre_not_in: [String]
   canManageProducts: Boolean
   canManageProducts_not: Boolean
   canSeeOtherUsers: Boolean
@@ -853,17 +853,17 @@ input RoleWhereInput {
   """
    condition must be true for all nodes
   """
-  assignedTo_every: UserWhereInput
+  asignado_every: UserWhereInput
 
   """
    condition must be true for at least 1 node
   """
-  assignedTo_some: UserWhereInput
+  asignado_some: UserWhereInput
 
   """
    condition must be false for all nodes
   """
-  assignedTo_none: UserWhereInput
+  asignado_none: UserWhereInput
 }
 
 input RoleWhereUniqueInput {
@@ -873,8 +873,8 @@ input RoleWhereUniqueInput {
 enum SortRolesBy {
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
+  nombre_ASC
+  nombre_DESC
   canManageProducts_ASC
   canManageProducts_DESC
   canSeeOtherUsers_ASC
@@ -887,19 +887,19 @@ enum SortRolesBy {
   canManageCart_DESC
   canManageOrders_ASC
   canManageOrders_DESC
-  assignedTo_ASC
-  assignedTo_DESC
+  asignado_ASC
+  asignado_DESC
 }
 
 input RoleUpdateInput {
-  name: String
+  nombre: String
   canManageProducts: Boolean
   canSeeOtherUsers: Boolean
   canManageUsers: Boolean
   canManageRoles: Boolean
   canManageCart: Boolean
   canManageOrders: Boolean
-  assignedTo: UserRelateToManyInput
+  asignado: UserRelateToManyInput
 }
 
 input RolesUpdateInput {
@@ -908,14 +908,14 @@ input RolesUpdateInput {
 }
 
 input RoleCreateInput {
-  name: String
+  nombre: String
   canManageProducts: Boolean
   canSeeOtherUsers: Boolean
   canManageUsers: Boolean
   canManageRoles: Boolean
   canManageCart: Boolean
   canManageOrders: Boolean
-  assignedTo: UserRelateToManyInput
+  asignado: UserRelateToManyInput
 }
 
 input RolesCreateInput {
@@ -961,7 +961,7 @@ type OrderItem {
   color: String
   cantidad: Int
   marca: String
-  order: Order
+  orden: Order
 }
 
 input OrderItemWhereInput {
@@ -1108,8 +1108,8 @@ input OrderItemWhereInput {
   marca_not: String
   marca_in: [String]
   marca_not_in: [String]
-  order: OrderWhereInput
-  order_is_null: Boolean
+  orden: OrderWhereInput
+  orden_is_null: Boolean
 }
 
 input OrderItemWhereUniqueInput {
@@ -1141,8 +1141,8 @@ enum SortOrderItemsBy {
   cantidad_DESC
   marca_ASC
   marca_DESC
-  order_ASC
-  order_DESC
+  orden_ASC
+  orden_DESC
 }
 
 input OrderItemUpdateInput {
@@ -1157,7 +1157,7 @@ input OrderItemUpdateInput {
   color: String
   cantidad: Int
   marca: String
-  order: OrderRelateToOneInput
+  orden: OrderRelateToOneInput
 }
 
 input OrderItemsUpdateInput {
@@ -1177,7 +1177,7 @@ input OrderItemCreateInput {
   color: String
   cantidad: Int
   marca: String
-  order: OrderRelateToOneInput
+  orden: OrderRelateToOneInput
 }
 
 input OrderItemsCreateInput {
@@ -1203,9 +1203,9 @@ input UserRelateToOneInput {
 """
 type CartItem {
   id: ID!
-  quantity: Int
-  product: Product
-  user: User
+  cantidad: Int
+  producto: Product
+  usuario: User
 }
 
 input CartItemWhereInput {
@@ -1219,18 +1219,18 @@ input CartItemWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
-  quantity: Int
-  quantity_not: Int
-  quantity_lt: Int
-  quantity_lte: Int
-  quantity_gt: Int
-  quantity_gte: Int
-  quantity_in: [Int]
-  quantity_not_in: [Int]
-  product: ProductWhereInput
-  product_is_null: Boolean
-  user: UserWhereInput
-  user_is_null: Boolean
+  cantidad: Int
+  cantidad_not: Int
+  cantidad_lt: Int
+  cantidad_lte: Int
+  cantidad_gt: Int
+  cantidad_gte: Int
+  cantidad_in: [Int]
+  cantidad_not_in: [Int]
+  producto: ProductWhereInput
+  producto_is_null: Boolean
+  usuario: UserWhereInput
+  usuario_is_null: Boolean
 }
 
 input CartItemWhereUniqueInput {
@@ -1240,18 +1240,18 @@ input CartItemWhereUniqueInput {
 enum SortCartItemsBy {
   id_ASC
   id_DESC
-  quantity_ASC
-  quantity_DESC
-  product_ASC
-  product_DESC
-  user_ASC
-  user_DESC
+  cantidad_ASC
+  cantidad_DESC
+  producto_ASC
+  producto_DESC
+  usuario_ASC
+  usuario_DESC
 }
 
 input CartItemUpdateInput {
-  quantity: Int
-  product: ProductRelateToOneInput
-  user: UserRelateToOneInput
+  cantidad: Int
+  producto: ProductRelateToOneInput
+  usuario: UserRelateToOneInput
 }
 
 input CartItemsUpdateInput {
@@ -1260,9 +1260,9 @@ input CartItemsUpdateInput {
 }
 
 input CartItemCreateInput {
-  quantity: Int
-  product: ProductRelateToOneInput
-  user: UserRelateToOneInput
+  cantidad: Int
+  producto: ProductRelateToOneInput
+  usuario: UserRelateToOneInput
 }
 
 input CartItemsCreateInput {
@@ -1299,8 +1299,8 @@ type Order {
     first: Int
     skip: Int
   ): _QueryMeta
-  user: User
-  charge: String
+  usuario: User
+  charge: Int
 }
 
 input OrderWhereInput {
@@ -1337,26 +1337,16 @@ input OrderWhereInput {
    condition must be false for all nodes
   """
   items_none: OrderItemWhereInput
-  user: UserWhereInput
-  user_is_null: Boolean
-  charge: String
-  charge_not: String
-  charge_contains: String
-  charge_not_contains: String
-  charge_starts_with: String
-  charge_not_starts_with: String
-  charge_ends_with: String
-  charge_not_ends_with: String
-  charge_i: String
-  charge_not_i: String
-  charge_contains_i: String
-  charge_not_contains_i: String
-  charge_starts_with_i: String
-  charge_not_starts_with_i: String
-  charge_ends_with_i: String
-  charge_not_ends_with_i: String
-  charge_in: [String]
-  charge_not_in: [String]
+  usuario: UserWhereInput
+  usuario_is_null: Boolean
+  charge: Int
+  charge_not: Int
+  charge_lt: Int
+  charge_lte: Int
+  charge_gt: Int
+  charge_gte: Int
+  charge_in: [Int]
+  charge_not_in: [Int]
 }
 
 input OrderWhereUniqueInput {
@@ -1370,8 +1360,8 @@ enum SortOrdersBy {
   total_DESC
   items_ASC
   items_DESC
-  user_ASC
-  user_DESC
+  usuario_ASC
+  usuario_DESC
   charge_ASC
   charge_DESC
 }
@@ -1379,8 +1369,8 @@ enum SortOrdersBy {
 input OrderUpdateInput {
   total: Int
   items: OrderItemRelateToManyInput
-  user: UserRelateToOneInput
-  charge: String
+  usuario: UserRelateToOneInput
+  charge: Int
 }
 
 input OrdersUpdateInput {
@@ -1391,8 +1381,8 @@ input OrdersUpdateInput {
 input OrderCreateInput {
   total: Int
   items: OrderItemRelateToManyInput
-  user: UserRelateToOneInput
-  charge: String
+  usuario: UserRelateToOneInput
+  charge: Int
 }
 
 input OrdersCreateInput {
