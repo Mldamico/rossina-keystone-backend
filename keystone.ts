@@ -71,7 +71,7 @@ export default auth.withAuth(
         maxAge: sessionMaxAge,
         secret: sessionSecret,
       }),
-      { User: `id nombre email role { ${permissionsList.join(' ')} }` }
+      { User: `id nombre email rol { ${permissionsList.join(' ')} }` }
     ),
   })
 );

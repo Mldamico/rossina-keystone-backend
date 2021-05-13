@@ -39,13 +39,14 @@ export const rules = {
     return { status: 'DISPONIBLE' };
   },
   canOrder({ session }: ListAccessArgs) {
+    console.log(session);
     if (!isSignedIn({ session })) {
       return false;
     }
     if (permissions.canManageCart({ session })) {
       return true;
     }
-    return { user: { id: session.itemId } };
+    return { usuario: { id: session.itemId } };
   },
   canManageOrderItems({ session }: ListAccessArgs) {
     if (!isSignedIn({ session })) {
@@ -54,7 +55,7 @@ export const rules = {
     if (permissions.canManageCart({ session })) {
       return true;
     }
-    return { order: { user: { id: session.itemId } } };
+    return { orden: { usuario: { id: session.itemId } } };
   },
   canManageUsers({ session }: ListAccessArgs) {
     console.log(session);
