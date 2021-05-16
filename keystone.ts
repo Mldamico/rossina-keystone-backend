@@ -41,6 +41,12 @@ const auth = createAuth({
 
 export default auth.withAuth(
   config({
+    server: {
+      cors: {
+        origin: [process.env.FRONTEND_URL],
+        credentials: true,
+      },
+    },
     db: process.env.DATABASE_URL
       ? {
           provider: 'postgresql',

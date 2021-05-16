@@ -31,7 +31,10 @@ export const Product = list({
     slug: virtual({
       graphQLReturnType: 'String',
       resolver: function (item) {
-        return item.nombre.split(' ').join('-').toLowerCase();
+        return `${item.nombre
+          .split(' ')
+          .join('-')
+          .toLowerCase()}-${item.articulo.toLowerCase()}`;
       },
     }),
     descripcion: text({ ui: { displayMode: 'textarea' } }),
@@ -74,19 +77,20 @@ export const Product = list({
     }),
     marca: select({
       options: [
-        { label: 'Selu', value: 'Selu' },
-        { label: 'Mora', value: 'Mora' },
-        { label: 'Mc Cartney', value: 'Mc Cartney' },
-        { label: 'Peter Pan', value: 'Peter Pan' },
-        { label: 'Silvana', value: 'Silvana' },
-        { label: 'Giordana', value: 'Giordana' },
-        { label: 'Promesse', value: 'Promesse' },
-        { label: 'Arlen', value: 'Arlen' },
-        { label: 'Puedo Querer', value: 'Puedo Querer' },
-        { label: 'Cecil', value: 'Cecil' },
-        { label: 'Delledonne', value: 'Delledonne' },
-        { label: 'Deville', value: 'Deville' },
-        { label: 'Perlea', value: 'Perlea' },
+        { label: 'Selu', value: 'selu' },
+        { label: 'Mora', value: 'mora' },
+        { label: 'Mc Cartney', value: 'mc-cartney' },
+        { label: 'Peter Pan', value: 'peter-pan' },
+        { label: 'Silvana', value: 'silvana' },
+        { label: 'Giordana', value: 'giordana' },
+        { label: 'Susurro', value: 'susurro' },
+        { label: 'Promesse', value: 'promesse' },
+        { label: 'Arlen', value: 'arlen' },
+        { label: 'Puedo Querer', value: 'puedo-querer' },
+        { label: 'Cecil', value: 'cecil' },
+        { label: 'Delledonne', value: 'delledonne' },
+        { label: 'Deville', value: 'deville' },
+        { label: 'Perlea', value: 'perlea' },
       ],
       defaultValue: 'Selu',
     }),

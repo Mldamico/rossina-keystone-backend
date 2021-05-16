@@ -11,8 +11,8 @@ export type Session = {
   itemId: string;
   listKey: string;
   data: {
-    name: string;
-    role?: {
+    nombre: string;
+    rol?: {
       id: string;
       name: string;
     } & {
