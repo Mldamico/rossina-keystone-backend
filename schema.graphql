@@ -243,10 +243,24 @@ input ProductImageRelateToManyInput {
   disconnectAll: Boolean
 }
 
+input TipoDePrendaRelateToOneInput {
+  create: TipoDePrendaCreateInput
+  connect: TipoDePrendaWhereUniqueInput
+  disconnect: TipoDePrendaWhereUniqueInput
+  disconnectAll: Boolean
+}
+
 input StockRelateToManyInput {
   create: [StockCreateInput]
   connect: [StockWhereUniqueInput]
   disconnect: [StockWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input BrandRelateToOneInput {
+  create: BrandCreateInput
+  connect: BrandWhereUniqueInput
+  disconnect: BrandWhereUniqueInput
   disconnectAll: Boolean
 }
 
@@ -278,7 +292,7 @@ type Product {
   ): _QueryMeta
   status: String
   precio: Int
-  tipoDePrenda: String
+  tipoDePrenda: TipoDePrenda
   stock(
     where: StockWhereInput
     search: String
@@ -295,7 +309,7 @@ type Product {
     first: Int
     skip: Int
   ): _QueryMeta
-  marca: String
+  marca: Brand
 }
 
 input ProductWhereInput {
@@ -390,10 +404,8 @@ input ProductWhereInput {
   precio_gte: Int
   precio_in: [Int]
   precio_not_in: [Int]
-  tipoDePrenda: String
-  tipoDePrenda_not: String
-  tipoDePrenda_in: [String]
-  tipoDePrenda_not_in: [String]
+  tipoDePrenda: TipoDePrendaWhereInput
+  tipoDePrenda_is_null: Boolean
 
   """
    condition must be true for all nodes
@@ -409,10 +421,8 @@ input ProductWhereInput {
    condition must be false for all nodes
   """
   stock_none: StockWhereInput
-  marca: String
-  marca_not: String
-  marca_in: [String]
-  marca_not_in: [String]
+  marca: BrandWhereInput
+  marca_is_null: Boolean
 }
 
 input ProductWhereUniqueInput {
@@ -449,9 +459,9 @@ input ProductUpdateInput {
   imagen: ProductImageRelateToManyInput
   status: String
   precio: Int
-  tipoDePrenda: String
+  tipoDePrenda: TipoDePrendaRelateToOneInput
   stock: StockRelateToManyInput
-  marca: String
+  marca: BrandRelateToOneInput
 }
 
 input ProductsUpdateInput {
@@ -466,9 +476,9 @@ input ProductCreateInput {
   imagen: ProductImageRelateToManyInput
   status: String
   precio: Int
-  tipoDePrenda: String
+  tipoDePrenda: TipoDePrendaRelateToOneInput
   stock: StockRelateToManyInput
-  marca: String
+  marca: BrandRelateToOneInput
 }
 
 input ProductsCreateInput {
@@ -1389,6 +1399,263 @@ input OrdersCreateInput {
   data: OrderCreateInput
 }
 
+input TipoDePrendaRelateToManyInput {
+  create: [TipoDePrendaCreateInput]
+  connect: [TipoDePrendaWhereUniqueInput]
+  disconnect: [TipoDePrendaWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+input ProductRelateToManyInput {
+  create: [ProductCreateInput]
+  connect: [ProductWhereUniqueInput]
+  disconnect: [ProductWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+"""
+ A keystone list
+"""
+type Brand {
+  id: ID!
+  label: String
+  marca: String
+  slug: String
+  tipoDePrenda(
+    where: TipoDePrendaWhereInput
+    search: String
+    sortBy: [SortTipoDePrendasBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [TipoDePrenda!]!
+  _tipoDePrendaMeta(
+    where: TipoDePrendaWhereInput
+    search: String
+    sortBy: [SortTipoDePrendasBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+  producto(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Product!]!
+  _productoMeta(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+}
+
+input BrandWhereInput {
+  AND: [BrandWhereInput]
+  OR: [BrandWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  marca: String
+  marca_not: String
+  marca_contains: String
+  marca_not_contains: String
+  marca_starts_with: String
+  marca_not_starts_with: String
+  marca_ends_with: String
+  marca_not_ends_with: String
+  marca_i: String
+  marca_not_i: String
+  marca_contains_i: String
+  marca_not_contains_i: String
+  marca_starts_with_i: String
+  marca_not_starts_with_i: String
+  marca_ends_with_i: String
+  marca_not_ends_with_i: String
+  marca_in: [String]
+  marca_not_in: [String]
+
+  """
+   condition must be true for all nodes
+  """
+  tipoDePrenda_every: TipoDePrendaWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  tipoDePrenda_some: TipoDePrendaWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  tipoDePrenda_none: TipoDePrendaWhereInput
+
+  """
+   condition must be true for all nodes
+  """
+  producto_every: ProductWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  producto_some: ProductWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  producto_none: ProductWhereInput
+}
+
+input BrandWhereUniqueInput {
+  id: ID!
+}
+
+enum SortBrandsBy {
+  id_ASC
+  id_DESC
+  marca_ASC
+  marca_DESC
+  tipoDePrenda_ASC
+  tipoDePrenda_DESC
+  producto_ASC
+  producto_DESC
+}
+
+input BrandUpdateInput {
+  marca: String
+  tipoDePrenda: TipoDePrendaRelateToManyInput
+  producto: ProductRelateToManyInput
+}
+
+input BrandsUpdateInput {
+  id: ID!
+  data: BrandUpdateInput
+}
+
+input BrandCreateInput {
+  marca: String
+  tipoDePrenda: TipoDePrendaRelateToManyInput
+  producto: ProductRelateToManyInput
+}
+
+input BrandsCreateInput {
+  data: BrandCreateInput
+}
+
+"""
+ A keystone list
+"""
+type TipoDePrenda {
+  id: ID!
+  label: String
+  tipo: String
+  slug: String
+  producto(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Product!]!
+  _productoMeta(
+    where: ProductWhereInput
+    search: String
+    sortBy: [SortProductsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+}
+
+input TipoDePrendaWhereInput {
+  AND: [TipoDePrendaWhereInput]
+  OR: [TipoDePrendaWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  tipo: String
+  tipo_not: String
+  tipo_contains: String
+  tipo_not_contains: String
+  tipo_starts_with: String
+  tipo_not_starts_with: String
+  tipo_ends_with: String
+  tipo_not_ends_with: String
+  tipo_i: String
+  tipo_not_i: String
+  tipo_contains_i: String
+  tipo_not_contains_i: String
+  tipo_starts_with_i: String
+  tipo_not_starts_with_i: String
+  tipo_ends_with_i: String
+  tipo_not_ends_with_i: String
+  tipo_in: [String]
+  tipo_not_in: [String]
+
+  """
+   condition must be true for all nodes
+  """
+  producto_every: ProductWhereInput
+
+  """
+   condition must be true for at least 1 node
+  """
+  producto_some: ProductWhereInput
+
+  """
+   condition must be false for all nodes
+  """
+  producto_none: ProductWhereInput
+}
+
+input TipoDePrendaWhereUniqueInput {
+  id: ID!
+}
+
+enum SortTipoDePrendasBy {
+  id_ASC
+  id_DESC
+  tipo_ASC
+  tipo_DESC
+  producto_ASC
+  producto_DESC
+}
+
+input TipoDePrendaUpdateInput {
+  tipo: String
+  producto: ProductRelateToManyInput
+}
+
+input TipoDePrendasUpdateInput {
+  id: ID!
+  data: TipoDePrendaUpdateInput
+}
+
+input TipoDePrendaCreateInput {
+  tipo: String
+  producto: ProductRelateToManyInput
+}
+
+input TipoDePrendasCreateInput {
+  data: TipoDePrendaCreateInput
+}
+
 """
 The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
@@ -1641,6 +1908,66 @@ type Mutation {
    Delete multiple Order items by ID.
   """
   deleteOrders(ids: [ID!]): [Order]
+
+  """
+   Create a single Brand item.
+  """
+  createBrand(data: BrandCreateInput): Brand
+
+  """
+   Create multiple Brand items.
+  """
+  createBrands(data: [BrandsCreateInput]): [Brand]
+
+  """
+   Update a single Brand item by ID.
+  """
+  updateBrand(id: ID!, data: BrandUpdateInput): Brand
+
+  """
+   Update multiple Brand items by ID.
+  """
+  updateBrands(data: [BrandsUpdateInput]): [Brand]
+
+  """
+   Delete a single Brand item by ID.
+  """
+  deleteBrand(id: ID!): Brand
+
+  """
+   Delete multiple Brand items by ID.
+  """
+  deleteBrands(ids: [ID!]): [Brand]
+
+  """
+   Create a single TipoDePrenda item.
+  """
+  createTipoDePrenda(data: TipoDePrendaCreateInput): TipoDePrenda
+
+  """
+   Create multiple TipoDePrenda items.
+  """
+  createTipoDePrendas(data: [TipoDePrendasCreateInput]): [TipoDePrenda]
+
+  """
+   Update a single TipoDePrenda item by ID.
+  """
+  updateTipoDePrenda(id: ID!, data: TipoDePrendaUpdateInput): TipoDePrenda
+
+  """
+   Update multiple TipoDePrenda items by ID.
+  """
+  updateTipoDePrendas(data: [TipoDePrendasUpdateInput]): [TipoDePrenda]
+
+  """
+   Delete a single TipoDePrenda item by ID.
+  """
+  deleteTipoDePrenda(id: ID!): TipoDePrenda
+
+  """
+   Delete multiple TipoDePrenda items by ID.
+  """
+  deleteTipoDePrendas(ids: [ID!]): [TipoDePrenda]
   authenticateUserWithPassword(
     email: String!
     password: String!
@@ -1914,6 +2241,64 @@ type Query {
     where: OrderWhereInput
     search: String
     sortBy: [SortOrdersBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all Brand items which match the where clause.
+  """
+  allBrands(
+    where: BrandWhereInput
+    search: String
+    sortBy: [SortBrandsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [Brand]
+
+  """
+   Search for the Brand item with the matching ID.
+  """
+  Brand(where: BrandWhereUniqueInput!): Brand
+
+  """
+   Perform a meta-query on all Brand items which match the where clause.
+  """
+  _allBrandsMeta(
+    where: BrandWhereInput
+    search: String
+    sortBy: [SortBrandsBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): _QueryMeta
+
+  """
+   Search for all TipoDePrenda items which match the where clause.
+  """
+  allTipoDePrendas(
+    where: TipoDePrendaWhereInput
+    search: String
+    sortBy: [SortTipoDePrendasBy!]
+    orderBy: String
+    first: Int
+    skip: Int
+  ): [TipoDePrenda]
+
+  """
+   Search for the TipoDePrenda item with the matching ID.
+  """
+  TipoDePrenda(where: TipoDePrendaWhereUniqueInput!): TipoDePrenda
+
+  """
+   Perform a meta-query on all TipoDePrenda items which match the where clause.
+  """
+  _allTipoDePrendasMeta(
+    where: TipoDePrendaWhereInput
+    search: String
+    sortBy: [SortTipoDePrendasBy!]
     orderBy: String
     first: Int
     skip: Int

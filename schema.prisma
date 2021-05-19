@@ -30,11 +30,16 @@ model Product {
   descripcion            String?
   status                 String?
   precio                 Int?
-  tipoDePrenda           String?
-  marca                  String?
   imagen                 ProductImage[] @relation("Product_imagen_many", references: [id])
+  tipoDePrenda           TipoDePrenda?  @relation("ProducttipoDePrenda", fields: [tipoDePrendaId], references: [id])
+  tipoDePrendaId         Int?           @map("tipoDePrenda")
   stock                  Stock[]        @relation("Product_stock_many", references: [id])
+  marca                  Brand?         @relation("Productmarca", fields: [marcaId], references: [id])
+  marcaId                Int?           @map("marca")
   from_CartItem_producto CartItem[]     @relation("CartItemproducto")
+
+  @@index([tipoDePrendaId])
+  @@index([marcaId])
 }
 
 model ProductImage {
@@ -111,4 +116,18 @@ model Order {
   usuarioId Int?        @map("usuario")
 
   @@index([usuarioId])
+}
+
+model Brand {
+  id           Int            @id @default(autoincrement())
+  marca        String?
+  tipoDePrenda TipoDePrenda[] @relation("Brand_tipoDePrenda_many", references: [id])
+  producto     Product[]      @relation("Productmarca")
+}
+
+model TipoDePrenda {
+  id                      Int       @id @default(autoincrement())
+  tipo                    String?
+  producto                Product[] @relation("ProducttipoDePrenda")
+  from_Brand_tipoDePrenda Brand[]   @relation("Brand_tipoDePrenda_many", references: [id])
 }

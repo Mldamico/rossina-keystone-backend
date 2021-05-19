@@ -15,6 +15,8 @@ import { permissionsList } from './schemas/fields';
 import { OrderItem } from './schemas/OrderItem';
 import { Order } from './schemas/Order';
 import { CartItem } from './schemas/CartItem';
+import { Brand } from './schemas/Brand';
+import { TipoDePrenda } from './schemas/TipoDePrenda';
 
 let sessionSecret = process.env.SESSION_SECRET;
 const databaseURL = process.env.DATABASE_URL || 'file:./keystone.db';
@@ -70,6 +72,8 @@ export default auth.withAuth(
       OrderItem,
       CartItem,
       Order,
+      Brand,
+      TipoDePrenda,
     }),
 
     session: withItemData(

@@ -61,12 +61,7 @@ export const Product = list({
       },
     }),
     precio: integer({ isRequired: true }),
-    tipoDePrenda: select({
-      options: [
-        { label: 'Corseteria', value: 'Corseteria' },
-        { label: 'Lenceria', value: 'Lenceria' },
-      ],
-    }),
+    tipoDePrenda: relationship({ ref: 'TipoDePrenda.producto' }),
     stock: relationship({
       ref: 'Stock',
       many: true,
@@ -75,24 +70,6 @@ export const Product = list({
         listView: { fieldMode: 'hidden' },
       },
     }),
-    marca: select({
-      options: [
-        { label: 'Selu', value: 'selu' },
-        { label: 'Mora', value: 'mora' },
-        { label: 'Mc Cartney', value: 'mc-cartney' },
-        { label: 'Peter Pan', value: 'peter-pan' },
-        { label: 'Silvana', value: 'silvana' },
-        { label: 'Giordana', value: 'giordana' },
-        { label: 'Susurro', value: 'susurro' },
-        { label: 'Promesse', value: 'promesse' },
-        { label: 'Arlen', value: 'arlen' },
-        { label: 'Puedo Querer', value: 'puedo-querer' },
-        { label: 'Cecil', value: 'cecil' },
-        { label: 'Delledonne', value: 'delledonne' },
-        { label: 'Deville', value: 'deville' },
-        { label: 'Perlea', value: 'perlea' },
-      ],
-      defaultValue: 'Selu',
-    }),
+    marca: relationship({ ref: 'Brand.producto' }),
   },
 });
