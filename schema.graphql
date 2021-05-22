@@ -62,6 +62,9 @@ type User {
     first: Int
     skip: Int
   ): _QueryMeta
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
 }
 
 input UserWhereInput {
@@ -180,6 +183,23 @@ input UserWhereInput {
    condition must be false for all nodes
   """
   ordenes_none: OrderWhereInput
+  passwordResetToken_is_set: Boolean
+  passwordResetIssuedAt: String
+  passwordResetIssuedAt_not: String
+  passwordResetIssuedAt_lt: String
+  passwordResetIssuedAt_lte: String
+  passwordResetIssuedAt_gt: String
+  passwordResetIssuedAt_gte: String
+  passwordResetIssuedAt_in: [String]
+  passwordResetIssuedAt_not_in: [String]
+  passwordResetRedeemedAt: String
+  passwordResetRedeemedAt_not: String
+  passwordResetRedeemedAt_lt: String
+  passwordResetRedeemedAt_lte: String
+  passwordResetRedeemedAt_gt: String
+  passwordResetRedeemedAt_gte: String
+  passwordResetRedeemedAt_in: [String]
+  passwordResetRedeemedAt_not_in: [String]
 }
 
 input UserWhereUniqueInput {
@@ -203,6 +223,10 @@ enum SortUsersBy {
   cart_DESC
   ordenes_ASC
   ordenes_DESC
+  passwordResetIssuedAt_ASC
+  passwordResetIssuedAt_DESC
+  passwordResetRedeemedAt_ASC
+  passwordResetRedeemedAt_DESC
 }
 
 input UserUpdateInput {
@@ -214,6 +238,9 @@ input UserUpdateInput {
   rol: RoleRelateToOneInput
   cart: CartItemRelateToManyInput
   ordenes: OrderRelateToManyInput
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
 }
 
 input UsersUpdateInput {
@@ -230,6 +257,9 @@ input UserCreateInput {
   rol: RoleRelateToOneInput
   cart: CartItemRelateToManyInput
   ordenes: OrderRelateToManyInput
+  passwordResetToken: String
+  passwordResetIssuedAt: String
+  passwordResetRedeemedAt: String
 }
 
 input UsersCreateInput {
@@ -293,6 +323,7 @@ type Product {
   status: String
   precio: Int
   tipoDePrenda: TipoDePrenda
+  categoria: String
   stock(
     where: StockWhereInput
     search: String
@@ -406,6 +437,10 @@ input ProductWhereInput {
   precio_not_in: [Int]
   tipoDePrenda: TipoDePrendaWhereInput
   tipoDePrenda_is_null: Boolean
+  categoria: String
+  categoria_not: String
+  categoria_in: [String]
+  categoria_not_in: [String]
 
   """
    condition must be true for all nodes
@@ -446,6 +481,8 @@ enum SortProductsBy {
   precio_DESC
   tipoDePrenda_ASC
   tipoDePrenda_DESC
+  categoria_ASC
+  categoria_DESC
   stock_ASC
   stock_DESC
   marca_ASC
@@ -460,6 +497,7 @@ input ProductUpdateInput {
   status: String
   precio: Int
   tipoDePrenda: TipoDePrendaRelateToOneInput
+  categoria: String
   stock: StockRelateToManyInput
   marca: BrandRelateToOneInput
 }
@@ -477,6 +515,7 @@ input ProductCreateInput {
   status: String
   precio: Int
   tipoDePrenda: TipoDePrendaRelateToOneInput
+  categoria: String
   stock: StockRelateToManyInput
   marca: BrandRelateToOneInput
 }
@@ -609,20 +648,34 @@ input ProductImagesCreateInput {
   data: ProductImageCreateInput
 }
 
+input ProductRelateToOneInput {
+  create: ProductCreateInput
+  connect: ProductWhereUniqueInput
+  disconnect: ProductWhereUniqueInput
+  disconnectAll: Boolean
+}
+
 """
  A keystone list
 """
 type Stock {
   id: ID!
   label: String
+  producto: Product
   color: String
-  cantidadTalle0: Int
+  nombreTalle1: String
   cantidadTalle1: Int
+  nombreTalle2: String
   cantidadTalle2: Int
+  nombreTalle3: String
   cantidadTalle3: Int
+  nombreTalle4: String
   cantidadTalle4: Int
+  nombreTalle5: String
   cantidadTalle5: Int
+  nombreTalle6: String
   cantidadTalle6: Int
+  nombreTalle7: String
   cantidadTalle7: Int
 }
 
@@ -637,6 +690,8 @@ input StockWhereInput {
   id_gte: ID
   id_in: [ID]
   id_not_in: [ID]
+  producto: ProductWhereInput
+  producto_is_null: Boolean
   color: String
   color_not: String
   color_contains: String
@@ -655,14 +710,24 @@ input StockWhereInput {
   color_not_ends_with_i: String
   color_in: [String]
   color_not_in: [String]
-  cantidadTalle0: Int
-  cantidadTalle0_not: Int
-  cantidadTalle0_lt: Int
-  cantidadTalle0_lte: Int
-  cantidadTalle0_gt: Int
-  cantidadTalle0_gte: Int
-  cantidadTalle0_in: [Int]
-  cantidadTalle0_not_in: [Int]
+  nombreTalle1: String
+  nombreTalle1_not: String
+  nombreTalle1_contains: String
+  nombreTalle1_not_contains: String
+  nombreTalle1_starts_with: String
+  nombreTalle1_not_starts_with: String
+  nombreTalle1_ends_with: String
+  nombreTalle1_not_ends_with: String
+  nombreTalle1_i: String
+  nombreTalle1_not_i: String
+  nombreTalle1_contains_i: String
+  nombreTalle1_not_contains_i: String
+  nombreTalle1_starts_with_i: String
+  nombreTalle1_not_starts_with_i: String
+  nombreTalle1_ends_with_i: String
+  nombreTalle1_not_ends_with_i: String
+  nombreTalle1_in: [String]
+  nombreTalle1_not_in: [String]
   cantidadTalle1: Int
   cantidadTalle1_not: Int
   cantidadTalle1_lt: Int
@@ -671,6 +736,24 @@ input StockWhereInput {
   cantidadTalle1_gte: Int
   cantidadTalle1_in: [Int]
   cantidadTalle1_not_in: [Int]
+  nombreTalle2: String
+  nombreTalle2_not: String
+  nombreTalle2_contains: String
+  nombreTalle2_not_contains: String
+  nombreTalle2_starts_with: String
+  nombreTalle2_not_starts_with: String
+  nombreTalle2_ends_with: String
+  nombreTalle2_not_ends_with: String
+  nombreTalle2_i: String
+  nombreTalle2_not_i: String
+  nombreTalle2_contains_i: String
+  nombreTalle2_not_contains_i: String
+  nombreTalle2_starts_with_i: String
+  nombreTalle2_not_starts_with_i: String
+  nombreTalle2_ends_with_i: String
+  nombreTalle2_not_ends_with_i: String
+  nombreTalle2_in: [String]
+  nombreTalle2_not_in: [String]
   cantidadTalle2: Int
   cantidadTalle2_not: Int
   cantidadTalle2_lt: Int
@@ -679,6 +762,24 @@ input StockWhereInput {
   cantidadTalle2_gte: Int
   cantidadTalle2_in: [Int]
   cantidadTalle2_not_in: [Int]
+  nombreTalle3: String
+  nombreTalle3_not: String
+  nombreTalle3_contains: String
+  nombreTalle3_not_contains: String
+  nombreTalle3_starts_with: String
+  nombreTalle3_not_starts_with: String
+  nombreTalle3_ends_with: String
+  nombreTalle3_not_ends_with: String
+  nombreTalle3_i: String
+  nombreTalle3_not_i: String
+  nombreTalle3_contains_i: String
+  nombreTalle3_not_contains_i: String
+  nombreTalle3_starts_with_i: String
+  nombreTalle3_not_starts_with_i: String
+  nombreTalle3_ends_with_i: String
+  nombreTalle3_not_ends_with_i: String
+  nombreTalle3_in: [String]
+  nombreTalle3_not_in: [String]
   cantidadTalle3: Int
   cantidadTalle3_not: Int
   cantidadTalle3_lt: Int
@@ -687,6 +788,24 @@ input StockWhereInput {
   cantidadTalle3_gte: Int
   cantidadTalle3_in: [Int]
   cantidadTalle3_not_in: [Int]
+  nombreTalle4: String
+  nombreTalle4_not: String
+  nombreTalle4_contains: String
+  nombreTalle4_not_contains: String
+  nombreTalle4_starts_with: String
+  nombreTalle4_not_starts_with: String
+  nombreTalle4_ends_with: String
+  nombreTalle4_not_ends_with: String
+  nombreTalle4_i: String
+  nombreTalle4_not_i: String
+  nombreTalle4_contains_i: String
+  nombreTalle4_not_contains_i: String
+  nombreTalle4_starts_with_i: String
+  nombreTalle4_not_starts_with_i: String
+  nombreTalle4_ends_with_i: String
+  nombreTalle4_not_ends_with_i: String
+  nombreTalle4_in: [String]
+  nombreTalle4_not_in: [String]
   cantidadTalle4: Int
   cantidadTalle4_not: Int
   cantidadTalle4_lt: Int
@@ -695,6 +814,24 @@ input StockWhereInput {
   cantidadTalle4_gte: Int
   cantidadTalle4_in: [Int]
   cantidadTalle4_not_in: [Int]
+  nombreTalle5: String
+  nombreTalle5_not: String
+  nombreTalle5_contains: String
+  nombreTalle5_not_contains: String
+  nombreTalle5_starts_with: String
+  nombreTalle5_not_starts_with: String
+  nombreTalle5_ends_with: String
+  nombreTalle5_not_ends_with: String
+  nombreTalle5_i: String
+  nombreTalle5_not_i: String
+  nombreTalle5_contains_i: String
+  nombreTalle5_not_contains_i: String
+  nombreTalle5_starts_with_i: String
+  nombreTalle5_not_starts_with_i: String
+  nombreTalle5_ends_with_i: String
+  nombreTalle5_not_ends_with_i: String
+  nombreTalle5_in: [String]
+  nombreTalle5_not_in: [String]
   cantidadTalle5: Int
   cantidadTalle5_not: Int
   cantidadTalle5_lt: Int
@@ -703,6 +840,24 @@ input StockWhereInput {
   cantidadTalle5_gte: Int
   cantidadTalle5_in: [Int]
   cantidadTalle5_not_in: [Int]
+  nombreTalle6: String
+  nombreTalle6_not: String
+  nombreTalle6_contains: String
+  nombreTalle6_not_contains: String
+  nombreTalle6_starts_with: String
+  nombreTalle6_not_starts_with: String
+  nombreTalle6_ends_with: String
+  nombreTalle6_not_ends_with: String
+  nombreTalle6_i: String
+  nombreTalle6_not_i: String
+  nombreTalle6_contains_i: String
+  nombreTalle6_not_contains_i: String
+  nombreTalle6_starts_with_i: String
+  nombreTalle6_not_starts_with_i: String
+  nombreTalle6_ends_with_i: String
+  nombreTalle6_not_ends_with_i: String
+  nombreTalle6_in: [String]
+  nombreTalle6_not_in: [String]
   cantidadTalle6: Int
   cantidadTalle6_not: Int
   cantidadTalle6_lt: Int
@@ -711,6 +866,24 @@ input StockWhereInput {
   cantidadTalle6_gte: Int
   cantidadTalle6_in: [Int]
   cantidadTalle6_not_in: [Int]
+  nombreTalle7: String
+  nombreTalle7_not: String
+  nombreTalle7_contains: String
+  nombreTalle7_not_contains: String
+  nombreTalle7_starts_with: String
+  nombreTalle7_not_starts_with: String
+  nombreTalle7_ends_with: String
+  nombreTalle7_not_ends_with: String
+  nombreTalle7_i: String
+  nombreTalle7_not_i: String
+  nombreTalle7_contains_i: String
+  nombreTalle7_not_contains_i: String
+  nombreTalle7_starts_with_i: String
+  nombreTalle7_not_starts_with_i: String
+  nombreTalle7_ends_with_i: String
+  nombreTalle7_not_ends_with_i: String
+  nombreTalle7_in: [String]
+  nombreTalle7_not_in: [String]
   cantidadTalle7: Int
   cantidadTalle7_not: Int
   cantidadTalle7_lt: Int
@@ -728,35 +901,56 @@ input StockWhereUniqueInput {
 enum SortStocksBy {
   id_ASC
   id_DESC
+  producto_ASC
+  producto_DESC
   color_ASC
   color_DESC
-  cantidadTalle0_ASC
-  cantidadTalle0_DESC
+  nombreTalle1_ASC
+  nombreTalle1_DESC
   cantidadTalle1_ASC
   cantidadTalle1_DESC
+  nombreTalle2_ASC
+  nombreTalle2_DESC
   cantidadTalle2_ASC
   cantidadTalle2_DESC
+  nombreTalle3_ASC
+  nombreTalle3_DESC
   cantidadTalle3_ASC
   cantidadTalle3_DESC
+  nombreTalle4_ASC
+  nombreTalle4_DESC
   cantidadTalle4_ASC
   cantidadTalle4_DESC
+  nombreTalle5_ASC
+  nombreTalle5_DESC
   cantidadTalle5_ASC
   cantidadTalle5_DESC
+  nombreTalle6_ASC
+  nombreTalle6_DESC
   cantidadTalle6_ASC
   cantidadTalle6_DESC
+  nombreTalle7_ASC
+  nombreTalle7_DESC
   cantidadTalle7_ASC
   cantidadTalle7_DESC
 }
 
 input StockUpdateInput {
+  producto: ProductRelateToOneInput
   color: String
-  cantidadTalle0: Int
+  nombreTalle1: String
   cantidadTalle1: Int
+  nombreTalle2: String
   cantidadTalle2: Int
+  nombreTalle3: String
   cantidadTalle3: Int
+  nombreTalle4: String
   cantidadTalle4: Int
+  nombreTalle5: String
   cantidadTalle5: Int
+  nombreTalle6: String
   cantidadTalle6: Int
+  nombreTalle7: String
   cantidadTalle7: Int
 }
 
@@ -766,14 +960,21 @@ input StocksUpdateInput {
 }
 
 input StockCreateInput {
+  producto: ProductRelateToOneInput
   color: String
-  cantidadTalle0: Int
+  nombreTalle1: String
   cantidadTalle1: Int
+  nombreTalle2: String
   cantidadTalle2: Int
+  nombreTalle3: String
   cantidadTalle3: Int
+  nombreTalle4: String
   cantidadTalle4: Int
+  nombreTalle5: String
   cantidadTalle5: Int
+  nombreTalle6: String
   cantidadTalle6: Int
+  nombreTalle7: String
   cantidadTalle7: Int
 }
 
@@ -1192,13 +1393,6 @@ input OrderItemCreateInput {
 
 input OrderItemsCreateInput {
   data: OrderItemCreateInput
-}
-
-input ProductRelateToOneInput {
-  create: ProductCreateInput
-  connect: ProductWhereUniqueInput
-  disconnect: ProductWhereUniqueInput
-  disconnectAll: Boolean
 }
 
 input UserRelateToOneInput {
@@ -1975,6 +2169,12 @@ type Mutation {
   createInitialUser(
     data: CreateInitialUserInput!
   ): UserAuthenticationWithPasswordSuccess!
+  sendUserPasswordResetLink(email: String!): SendUserPasswordResetLinkResult
+  redeemUserPasswordResetToken(
+    email: String!
+    token: String!
+    password: String!
+  ): RedeemUserPasswordResetTokenResult
   endSession: Boolean!
 }
 
@@ -2011,6 +2211,36 @@ input CreateInitialUserInput {
   nombre: String
   email: String
   password: String
+}
+
+type SendUserPasswordResetLinkResult {
+  code: PasswordResetRequestErrorCode!
+  message: String!
+}
+
+enum PasswordResetRequestErrorCode {
+  IDENTITY_NOT_FOUND
+  MULTIPLE_IDENTITY_MATCHES
+}
+
+type ValidateUserPasswordResetTokenResult {
+  code: PasswordResetRedemptionErrorCode!
+  message: String!
+}
+
+type RedeemUserPasswordResetTokenResult {
+  code: PasswordResetRedemptionErrorCode!
+  message: String!
+}
+
+enum PasswordResetRedemptionErrorCode {
+  FAILURE
+  IDENTITY_NOT_FOUND
+  MULTIPLE_IDENTITY_MATCHES
+  TOKEN_NOT_SET
+  TOKEN_MISMATCH
+  TOKEN_EXPIRED
+  TOKEN_REDEEMED
 }
 
 type Query {
@@ -2304,6 +2534,10 @@ type Query {
     skip: Int
   ): _QueryMeta
   authenticatedItem: AuthenticatedItem
+  validateUserPasswordResetToken(
+    email: String!
+    token: String!
+  ): ValidateUserPasswordResetTokenResult
   keystone: KeystoneMeta!
 }
 

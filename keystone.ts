@@ -17,6 +17,7 @@ import { Order } from './schemas/Order';
 import { CartItem } from './schemas/CartItem';
 import { Brand } from './schemas/Brand';
 import { TipoDePrenda } from './schemas/TipoDePrenda';
+import { sendPasswordResetEmail } from './lib/mail';
 
 let sessionSecret = process.env.SESSION_SECRET;
 const databaseURL = process.env.DATABASE_URL || 'file:./keystone.db';
@@ -39,6 +40,11 @@ const auth = createAuth({
   initFirstItem: {
     fields: ['nombre', 'email', 'password'],
   },
+  passwordResetLink: {
+    async sendToken(args) {
+      await sendPasswordResetEmail(args.token, args.identity);
+    },
+  },
 });
 
 export default auth.withAuth(
@@ -53,7 +59,7 @@ export default auth.withAuth(
       ? {
           provider: 'postgresql',
           url: process.env.DATABASE_URL,
-          enableLogging: true,
+          // enableLogging: true,
         }
       : {
           provider: 'sqlite',

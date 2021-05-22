@@ -9,16 +9,19 @@ generator client {
 }
 
 model User {
-  id       Int        @id @default(autoincrement())
-  nombre   String?
-  apellido String?
-  telefono String?
-  email    String?    @unique
-  password String?
-  rol      Role?      @relation("Userrol", fields: [rolId], references: [id])
-  rolId    Int?       @map("rol")
-  cart     CartItem[] @relation("CartItemusuario")
-  ordenes  Order[]    @relation("Orderusuario")
+  id                      Int        @id @default(autoincrement())
+  nombre                  String?
+  apellido                String?
+  telefono                String?
+  email                   String?    @unique
+  password                String?
+  passwordResetToken      String?
+  passwordResetIssuedAt   DateTime?
+  passwordResetRedeemedAt DateTime?
+  rol                     Role?      @relation("Userrol", fields: [rolId], references: [id])
+  rolId                   Int?       @map("rol")
+  cart                    CartItem[] @relation("CartItemusuario")
+  ordenes                 Order[]    @relation("Orderusuario")
 
   @@index([rolId])
 }
@@ -30,10 +33,11 @@ model Product {
   descripcion            String?
   status                 String?
   precio                 Int?
+  categoria              String?
   imagen                 ProductImage[] @relation("Product_imagen_many", references: [id])
   tipoDePrenda           TipoDePrenda?  @relation("ProducttipoDePrenda", fields: [tipoDePrendaId], references: [id])
   tipoDePrendaId         Int?           @map("tipoDePrenda")
-  stock                  Stock[]        @relation("Product_stock_many", references: [id])
+  stock                  Stock[]        @relation("Stockproducto")
   marca                  Brand?         @relation("Productmarca", fields: [marcaId], references: [id])
   marcaId                Int?           @map("marca")
   from_CartItem_producto CartItem[]     @relation("CartItemproducto")
@@ -51,17 +55,26 @@ model ProductImage {
 }
 
 model Stock {
-  id                 Int       @id @default(autoincrement())
-  color              String?
-  cantidadTalle0     Int?
-  cantidadTalle1     Int?
-  cantidadTalle2     Int?
-  cantidadTalle3     Int?
-  cantidadTalle4     Int?
-  cantidadTalle5     Int?
-  cantidadTalle6     Int?
-  cantidadTalle7     Int?
-  from_Product_stock Product[] @relation("Product_stock_many", references: [id])
+  id             Int      @id @default(autoincrement())
+  color          String?
+  nombreTalle1   String?
+  cantidadTalle1 Int?
+  nombreTalle2   String?
+  cantidadTalle2 Int?
+  nombreTalle3   String?
+  cantidadTalle3 Int?
+  nombreTalle4   String?
+  cantidadTalle4 Int?
+  nombreTalle5   String?
+  cantidadTalle5 Int?
+  nombreTalle6   String?
+  cantidadTalle6 Int?
+  nombreTalle7   String?
+  cantidadTalle7 Int?
+  producto       Product? @relation("Stockproducto", fields: [productoId], references: [id])
+  productoId     Int?     @map("producto")
+
+  @@index([productoId])
 }
 
 model Role {
