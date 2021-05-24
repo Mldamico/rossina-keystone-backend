@@ -2175,6 +2175,7 @@ type Mutation {
     token: String!
     password: String!
   ): RedeemUserPasswordResetTokenResult
+  addToCart(productId: ID): CartItem
   endSession: Boolean!
 }
 

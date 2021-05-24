@@ -18,6 +18,7 @@ import { CartItem } from './schemas/CartItem';
 import { Brand } from './schemas/Brand';
 import { TipoDePrenda } from './schemas/TipoDePrenda';
 import { sendPasswordResetEmail } from './lib/mail';
+import { extendGraphqlSchema } from './mutations/index';
 
 let sessionSecret = process.env.SESSION_SECRET;
 const databaseURL = process.env.DATABASE_URL || 'file:./keystone.db';
@@ -81,7 +82,7 @@ export default auth.withAuth(
       Brand,
       TipoDePrenda,
     }),
-
+    extendGraphqlSchema,
     session: withItemData(
       statelessSessions({
         maxAge: sessionMaxAge,
