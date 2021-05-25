@@ -109,12 +109,14 @@ model OrderItem {
 }
 
 model CartItem {
-  id         Int      @id @default(autoincrement())
-  cantidad   Int?
-  producto   Product? @relation("CartItemproducto", fields: [productoId], references: [id])
-  productoId Int?     @map("producto")
-  usuario    User?    @relation("CartItemusuario", fields: [usuarioId], references: [id])
-  usuarioId  Int?     @map("usuario")
+  id                Int      @id @default(autoincrement())
+  cantidad          Int?
+  colorSeleccionado String?
+  talleSeleccionado String?
+  producto          Product? @relation("CartItemproducto", fields: [productoId], references: [id])
+  productoId        Int?     @map("producto")
+  usuario           User?    @relation("CartItemusuario", fields: [usuarioId], references: [id])
+  usuarioId         Int?     @map("usuario")
 
   @@index([productoId])
   @@index([usuarioId])

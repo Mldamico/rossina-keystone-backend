@@ -9,7 +9,6 @@ const generatedPermissions = Object.fromEntries(
   permissionsList.map((permission) => [
     permission,
     function ({ session }: ListAccessArgs) {
-      console.log(session);
       return !!session?.data.rol?.[permission];
     },
   ])
@@ -40,7 +39,6 @@ export const rules = {
     return { status: 'DISPONIBLE' };
   },
   canOrder({ session }: ListAccessArgs) {
-    console.log(session);
     if (!isSignedIn({ session })) {
       return false;
     }
@@ -59,7 +57,6 @@ export const rules = {
     return { orden: { usuario: { id: session.itemId } } };
   },
   canManageUsers({ session }: ListAccessArgs) {
-    console.log(session);
     if (!isSignedIn({ session })) {
       return false;
     }

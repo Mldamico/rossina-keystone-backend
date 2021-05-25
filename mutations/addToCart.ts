@@ -8,7 +8,11 @@ import { CartItem } from '../schemas/CartItem';
 
 async function addToCart(
   _root: unknown,
-  { productId }: { productId: string },
+  {
+    productId,
+    color,
+    talle,
+  }: { productId: string; color: string; talle: string },
   context: KeystoneContext
 ): Promise<CartItemCreateInput> {
   const sesh = context.session as Session;
@@ -21,36 +25,43 @@ async function addToCart(
 
   const allCartItems = (await context.lists.CartItem.findMany({
     where: {
-      user: {
+      usuario: {
         id: sesh.itemId,
       },
-      product: {
+      producto: {
         id: productId,
       },
     },
-    resolveFields: 'id,cantidad',
+    resolveFields: 'id,cantidad,talleSeleccionado, colorSeleccionado',
   })) as AllCartItems;
 
   const [existingCartItem] = allCartItems;
 
   if (existingCartItem) {
+    if (existingCartItem.cantidad > 2) {
+      return;
+    }
     return context.lists.CartItem.updateOne({
       id: existingCartItem.id,
-      data: { cantidad: existingCartItem.cantidad + 1 },
+      data: {
+        cantidad: existingCartItem.cantidad + 1,
+      },
       resolveFields: false,
     });
   }
 
   return context.lists.CartItem.createOne({
     data: {
-      product: {
+      producto: {
         connect: { id: productId },
       },
-      user: {
+      usuario: {
         connect: { id: sesh.itemId },
       },
+      talleSeleccionado: talle,
+      colorSeleccionado: color,
     },
-    resolveFields: 'id,cantidad',
+    resolveFields: 'id,cantidad, colorSeleccionado, talleSeleccionado',
   });
 }
 

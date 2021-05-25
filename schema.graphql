@@ -1408,6 +1408,8 @@ input UserRelateToOneInput {
 type CartItem {
   id: ID!
   cantidad: Int
+  colorSeleccionado: String
+  talleSeleccionado: String
   producto: Product
   usuario: User
 }
@@ -1431,6 +1433,42 @@ input CartItemWhereInput {
   cantidad_gte: Int
   cantidad_in: [Int]
   cantidad_not_in: [Int]
+  colorSeleccionado: String
+  colorSeleccionado_not: String
+  colorSeleccionado_contains: String
+  colorSeleccionado_not_contains: String
+  colorSeleccionado_starts_with: String
+  colorSeleccionado_not_starts_with: String
+  colorSeleccionado_ends_with: String
+  colorSeleccionado_not_ends_with: String
+  colorSeleccionado_i: String
+  colorSeleccionado_not_i: String
+  colorSeleccionado_contains_i: String
+  colorSeleccionado_not_contains_i: String
+  colorSeleccionado_starts_with_i: String
+  colorSeleccionado_not_starts_with_i: String
+  colorSeleccionado_ends_with_i: String
+  colorSeleccionado_not_ends_with_i: String
+  colorSeleccionado_in: [String]
+  colorSeleccionado_not_in: [String]
+  talleSeleccionado: String
+  talleSeleccionado_not: String
+  talleSeleccionado_contains: String
+  talleSeleccionado_not_contains: String
+  talleSeleccionado_starts_with: String
+  talleSeleccionado_not_starts_with: String
+  talleSeleccionado_ends_with: String
+  talleSeleccionado_not_ends_with: String
+  talleSeleccionado_i: String
+  talleSeleccionado_not_i: String
+  talleSeleccionado_contains_i: String
+  talleSeleccionado_not_contains_i: String
+  talleSeleccionado_starts_with_i: String
+  talleSeleccionado_not_starts_with_i: String
+  talleSeleccionado_ends_with_i: String
+  talleSeleccionado_not_ends_with_i: String
+  talleSeleccionado_in: [String]
+  talleSeleccionado_not_in: [String]
   producto: ProductWhereInput
   producto_is_null: Boolean
   usuario: UserWhereInput
@@ -1446,6 +1484,10 @@ enum SortCartItemsBy {
   id_DESC
   cantidad_ASC
   cantidad_DESC
+  colorSeleccionado_ASC
+  colorSeleccionado_DESC
+  talleSeleccionado_ASC
+  talleSeleccionado_DESC
   producto_ASC
   producto_DESC
   usuario_ASC
@@ -1454,6 +1496,8 @@ enum SortCartItemsBy {
 
 input CartItemUpdateInput {
   cantidad: Int
+  colorSeleccionado: String
+  talleSeleccionado: String
   producto: ProductRelateToOneInput
   usuario: UserRelateToOneInput
 }
@@ -1465,6 +1509,8 @@ input CartItemsUpdateInput {
 
 input CartItemCreateInput {
   cantidad: Int
+  colorSeleccionado: String
+  talleSeleccionado: String
   producto: ProductRelateToOneInput
   usuario: UserRelateToOneInput
 }
@@ -2175,7 +2221,7 @@ type Mutation {
     token: String!
     password: String!
   ): RedeemUserPasswordResetTokenResult
-  addToCart(productId: ID): CartItem
+  addToCart(productId: ID, color: String, talle: String): CartItem
   endSession: Boolean!
 }
 
